@@ -69,7 +69,7 @@
 		fade: [
 			function(done) {
 				var conf = this.getConf();
-				if (!$.browser.msie || conf.fadeIE) {
+				if (!$('html').hasClass('oldie') || conf.fadeIE) {
 					this.getTip().fadeTo(conf.fadeInSpeed, conf.opacity, done);
 				}
 				else {
@@ -79,7 +79,7 @@
 			},
 			function(done) {
 				var conf = this.getConf();
-				if (!$.browser.msie || conf.fadeIE) {
+				if (!$('html').hasClass('oldie') || conf.fadeIE) {
 					this.getTip().fadeOut(conf.fadeOutSpeed, done);
 				}
 				else {
@@ -100,8 +100,8 @@
 			 left = conf.relative ? trigger.position().left : trigger.offset().left,
 			 pos = conf.position[0];
 
-		top  -= tip.outerHeight() - conf.offset[0];
-		left += trigger.outerWidth() + conf.offset[1];
+		top  -= tip.outerHeight(false) - conf.offset[0];
+		left += trigger.outerWidth(false) + conf.offset[1];
 		
 		// iPad position fix
 		if (/iPad/i.test(navigator.userAgent)) {
@@ -109,14 +109,14 @@
 		}
 		
 		// adjust Y		
-		var height = tip.outerHeight() + trigger.outerHeight();
+		var height = tip.outerHeight(false) + trigger.outerHeight(false);
 		if (pos == 'center') 	{ top += height / 2; }
 		if (pos == 'bottom') 	{ top += height; }
 		
 		
 		// adjust X
 		pos = conf.position[1]; 	
-		var width = tip.outerWidth() + trigger.outerWidth();
+		var width = tip.outerWidth(false) + trigger.outerWidth(false);
 		if (pos == 'center') 	{ left -= width / 2; }
 		if (pos == 'left')   	{ left -= width; }	 
 		
